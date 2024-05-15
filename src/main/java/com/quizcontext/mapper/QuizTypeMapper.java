@@ -11,5 +11,5 @@ public interface QuizTypeMapper {
 
   QuizType toEntity(QuizTypeRequest quizTypeRequest);
 
-  QuizTypeResponse toResponse(QuizType quizType);
+  QuizTypeResponse toResponce(QuizType quizType);
 }

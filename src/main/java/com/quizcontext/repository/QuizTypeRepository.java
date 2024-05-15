@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /*
- * extends the JpaRepository interface so that we'll benefit from all the standard behavior of JpaRepository.
+ * Jpa Repository contains the APIs for basic CRUD operations, the APIS for pagination, and the APIs for sorting.
  */
 
 @Repository
