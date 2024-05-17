@@ -10,4 +10,6 @@ public interface CollectionService {
   Collection getById(Long id);
 
   List<Collection> getAll();
+
+  Collection update(Collection collection);
 }

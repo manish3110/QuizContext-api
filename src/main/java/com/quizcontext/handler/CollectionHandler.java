@@ -1,6 +1,7 @@
 package com.quizcontext.handler;
 
 import com.quizcontext.dto.request.CollectionRequest;
+import com.quizcontext.dto.request.CollectionUpdateRequest;
 import com.quizcontext.dto.response.CollectionResponse;
 import com.quizcontext.entity.Collection;
 import com.quizcontext.mapper.CollectionMapper;
@@ -29,5 +30,10 @@ public class CollectionHandler {
 
   public List<CollectionResponse> getAll() {
     return collectionMapper.toList(collectionService.getAll());
+  }
+
+  public CollectionResponse update(CollectionUpdateRequest collectionUpdateRequest) {
+    Collection collection = collectionMapper.toEntity(collectionUpdateRequest);
+    return collectionMapper.toResponse(collectionService.update(collection));
   }
 }
