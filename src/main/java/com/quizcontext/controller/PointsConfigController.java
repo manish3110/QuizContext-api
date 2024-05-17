@@ -4,6 +4,9 @@ import com.quizcontext.dto.request.PointsConfigRequest;
 import com.quizcontext.dto.response.PointsConfigResponse;
 import com.quizcontext.handler.PointsConfigHandler;
 import jakarta.validation.Valid;
+import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,5 +26,17 @@ public class PointsConfigController {
   public PointsConfigResponse create(@RequestBody @Valid PointsConfigRequest pointsConfigRequest) {
     PointsConfigResponse pointsConfigResponse = pointsConfigHandler.create(pointsConfigRequest);
     return pointsConfigResponse;
+  }
+
+  @GetMapping("/{id}")
+  public PointsConfigResponse getById(@PathVariable Long id) {
+    PointsConfigResponse pointsConfigResponse = pointsConfigHandler.getById(id);
+    return pointsConfigResponse;
+  }
+
+  @GetMapping
+  public List<PointsConfigResponse> getAll() {
+    List<PointsConfigResponse> pointsConfigResponses = pointsConfigHandler.getAll();
+    return pointsConfigResponses;
   }
 }
