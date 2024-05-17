@@ -3,6 +3,7 @@ package com.quizcontext.mapper;
 import com.quizcontext.dto.request.QuestionTypeRequest;
 import com.quizcontext.dto.response.QuestionTypeResponse;
 import com.quizcontext.entity.QuestionType;
+import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -11,4 +12,6 @@ public interface QuestionTypeMapper {
   QuestionType toEntity(QuestionTypeRequest questionTypeRequest);
 
   QuestionTypeResponse toResponse(QuestionType questionType);
+
+  List<QuestionTypeResponse> toList(List<QuestionType> questionTypesList);
 }
