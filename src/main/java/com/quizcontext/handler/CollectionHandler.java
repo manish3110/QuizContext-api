@@ -5,6 +5,7 @@ import com.quizcontext.dto.response.CollectionResponse;
 import com.quizcontext.entity.Collection;
 import com.quizcontext.mapper.CollectionMapper;
 import com.quizcontext.service.CollectionService;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,5 +21,13 @@ public class CollectionHandler {
   public CollectionResponse create(CollectionRequest collectionRequest) {
     Collection collection = collectionMapper.toEntity(collectionRequest);
     return collectionMapper.toResponse(collectionService.create(collection));
+  }
+
+  public CollectionResponse getById(Long id) {
+    return collectionMapper.toResponse(collectionService.getById(id));
+  }
+
+  public List<CollectionResponse> getAll() {
+    return collectionMapper.toList(collectionService.getAll());
   }
 }
