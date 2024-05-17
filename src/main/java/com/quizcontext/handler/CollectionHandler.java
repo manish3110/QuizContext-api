@@ -36,4 +36,8 @@ public class CollectionHandler {
     Collection collection = collectionMapper.toEntity(collectionUpdateRequest);
     return collectionMapper.toResponse(collectionService.update(collection));
   }
+
+  public void delete(Long id) {
+    collectionService.delete(id);
+  }
 }

@@ -40,4 +40,9 @@ public class CollectionServiceImp implements CollectionService {
     Collection updatedCollection = collectionMapper.toDbEntity(collection, existingCollection);
     return collectionRepository.save(updatedCollection);
   }
+
+  @Override
+  public void delete(Long id) {
+    collectionRepository.deleteById(id);
+  }
 }

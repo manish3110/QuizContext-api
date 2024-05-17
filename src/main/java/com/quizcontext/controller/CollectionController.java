@@ -6,6 +6,7 @@ import com.quizcontext.dto.response.CollectionResponse;
 import com.quizcontext.handler.CollectionHandler;
 import jakarta.validation.Valid;
 import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,5 +47,11 @@ public class CollectionController {
       @RequestBody @Valid CollectionUpdateRequest collectionUpdateRequest) {
     CollectionResponse collectionResponse = collectionHandler.update(collectionUpdateRequest);
     return collectionResponse;
+  }
+
+  @DeleteMapping("/{id}")
+  public String delete(@PathVariable Long id) {
+    collectionHandler.delete(id);
+    return "Data deleted succesfully";
   }
 }

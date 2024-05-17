@@ -12,4 +12,6 @@ public interface CollectionService {
   List<Collection> getAll();
 
   Collection update(Collection collection);
+
+  void delete(Long id);
 }
