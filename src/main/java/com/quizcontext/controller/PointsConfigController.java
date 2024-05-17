@@ -6,6 +6,7 @@ import com.quizcontext.dto.response.PointsConfigResponse;
 import com.quizcontext.handler.PointsConfigHandler;
 import jakarta.validation.Valid;
 import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,5 +49,11 @@ public class PointsConfigController {
     PointsConfigResponse pointsConfigResponse =
         pointsConfigHandler.update(pointsConfigUpdateRequest);
     return pointsConfigResponse;
+  }
+
+  @DeleteMapping("/{id}")
+  public String delete(@PathVariable Long id) {
+    pointsConfigHandler.delete(id);
+    return "Points config deleted sucessfully";
   }
 }

@@ -38,4 +38,8 @@ public class PointsConfigHandler {
     PointsConfig pointsConfig = pointsConfigMapper.toEntity(pointsConfigUpdateRequest);
     return pointsConfigMapper.toResponse(pointsConfigService.update(pointsConfig));
   }
+
+  public void delete(Long id) {
+    pointsConfigService.delete(id);
+  }
 }

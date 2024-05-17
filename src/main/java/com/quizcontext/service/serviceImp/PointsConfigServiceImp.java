@@ -41,4 +41,9 @@ public class PointsConfigServiceImp implements PointsConfigService {
         pointsConfigMapper.toDbEntity(pointsConfig, existPointsConfig);
     return pointsConfigRepository.save(updatedPointsConfig);
   }
+
+  @Override
+  public void delete(Long id) {
+    pointsConfigRepository.deleteById(id);
+  }
 }

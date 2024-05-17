@@ -11,4 +11,6 @@ public interface PointsConfigService {
   List<PointsConfig> getAll();
 
   PointsConfig update(PointsConfig pointsConfig);
+
+  void delete(Long id);
 }
