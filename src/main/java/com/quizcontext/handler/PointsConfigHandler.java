@@ -1,6 +1,7 @@
 package com.quizcontext.handler;
 
 import com.quizcontext.dto.request.PointsConfigRequest;
+import com.quizcontext.dto.request.PointsConfigUpdateRequest;
 import com.quizcontext.dto.response.PointsConfigResponse;
 import com.quizcontext.entity.PointsConfig;
 import com.quizcontext.mapper.PointsConfigMapper;
@@ -31,5 +32,10 @@ public class PointsConfigHandler {
 
   public List<PointsConfigResponse> getAll() {
     return pointsConfigMapper.toList(pointsConfigService.getAll());
+  }
+
+  public PointsConfigResponse update(PointsConfigUpdateRequest pointsConfigUpdateRequest) {
+    PointsConfig pointsConfig = pointsConfigMapper.toEntity(pointsConfigUpdateRequest);
+    return pointsConfigMapper.toResponse(pointsConfigService.update(pointsConfig));
   }
 }

@@ -9,4 +9,6 @@ public interface PointsConfigService {
   PointsConfig getById(Long id);
 
   List<PointsConfig> getAll();
+
+  PointsConfig update(PointsConfig pointsConfig);
 }
