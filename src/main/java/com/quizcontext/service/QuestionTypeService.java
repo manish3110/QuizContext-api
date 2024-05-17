@@ -9,4 +9,6 @@ public interface QuestionTypeService {
   List<QuestionType> getAll();
 
   QuestionType getById(Long id);
+
+  QuestionType update(QuestionType questionType);
 }

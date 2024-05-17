@@ -1,6 +1,7 @@
 package com.quizcontext.handler;
 
 import com.quizcontext.dto.request.QuestionTypeRequest;
+import com.quizcontext.dto.request.QuestionTypeUpdateRequest;
 import com.quizcontext.dto.response.QuestionTypeResponse;
 import com.quizcontext.entity.QuestionType;
 import com.quizcontext.mapper.QuestionTypeMapper;
@@ -31,5 +32,10 @@ public class QuestionTypeHandler {
 
   public QuestionTypeResponse getById(Long id) {
     return questionTypeMapper.toResponse(questionTypeService.getById(id));
+  }
+
+  public QuestionTypeResponse update(QuestionTypeUpdateRequest questionTypeUpdateRequest) {
+    QuestionType questionType = questionTypeMapper.toEntity(questionTypeUpdateRequest);
+    return questionTypeMapper.toResponse(questionTypeService.update(questionType));
   }
 }
