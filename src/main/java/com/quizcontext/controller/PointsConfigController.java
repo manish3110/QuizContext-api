@@ -1,11 +1,16 @@
 package com.quizcontext.controller;
 
+import com.quizcontext.constant.Constant;
+import com.quizcontext.dto.BaseResponse;
 import com.quizcontext.dto.request.PointsConfigRequest;
 import com.quizcontext.dto.request.PointsConfigUpdateRequest;
 import com.quizcontext.dto.response.PointsConfigResponse;
+import com.quizcontext.enums.ResultCode;
 import com.quizcontext.handler.PointsConfigHandler;
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.Locale;
+import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,40 +25,63 @@ import org.springframework.web.bind.annotation.RestController;
 public class PointsConfigController {
 
   private final PointsConfigHandler pointsConfigHandler;
+  private final MessageSource messageSource;
 
-  public PointsConfigController(PointsConfigHandler pointsConfigHandler) {
+  public PointsConfigController(
+      PointsConfigHandler pointsConfigHandler, MessageSource messageSource) {
     this.pointsConfigHandler = pointsConfigHandler;
+    this.messageSource = messageSource;
   }
 
   @PostMapping
-  public PointsConfigResponse create(@RequestBody @Valid PointsConfigRequest pointsConfigRequest) {
+  public BaseResponse<PointsConfigResponse> create(
+      @RequestBody @Valid PointsConfigRequest pointsConfigRequest) {
     PointsConfigResponse pointsConfigResponse = pointsConfigHandler.create(pointsConfigRequest);
-    return pointsConfigResponse;
+    return new BaseResponse<>(
+        ResultCode.SUCCESS.getCode(),
+        messageSource.getMessage(
+            "saved.data.success", new Object[] {Constant.POINTS_CONFIG}, Locale.getDefault()),
+        pointsConfigResponse);
   }
 
   @GetMapping("/{id}")
-  public PointsConfigResponse getById(@PathVariable Long id) {
+  public BaseResponse<PointsConfigResponse> getById(@PathVariable Long id) {
     PointsConfigResponse pointsConfigResponse = pointsConfigHandler.getById(id);
-    return pointsConfigResponse;
+    return new BaseResponse<>(
+        ResultCode.SUCCESS.getCode(),
+        messageSource.getMessage(
+            "found.data.success", new Object[] {Constant.POINTS_CONFIG}, Locale.getDefault()),
+        pointsConfigResponse);
   }
 
   @GetMapping
-  public List<PointsConfigResponse> getAll() {
+  public BaseResponse<List<PointsConfigResponse>> getAll() {
     List<PointsConfigResponse> pointsConfigResponses = pointsConfigHandler.getAll();
-    return pointsConfigResponses;
+    return new BaseResponse<>(
+        ResultCode.SUCCESS.getCode(),
+        messageSource.getMessage(
+            "found.data.success", new Object[] {Constant.POINTS_CONFIG}, Locale.getDefault()),
+        pointsConfigResponses);
   }
 
   @PutMapping
-  public PointsConfigResponse update(
+  public BaseResponse<PointsConfigResponse> update(
       @RequestBody @Valid PointsConfigUpdateRequest pointsConfigUpdateRequest) {
     PointsConfigResponse pointsConfigResponse =
         pointsConfigHandler.update(pointsConfigUpdateRequest);
-    return pointsConfigResponse;
+    return new BaseResponse<>(
+        ResultCode.SUCCESS.getCode(),
+        messageSource.getMessage(
+            "updated.data.success", new Object[] {Constant.POINTS_CONFIG}, Locale.getDefault()),
+        pointsConfigResponse);
   }
 
   @DeleteMapping("/{id}")
-  public String delete(@PathVariable Long id) {
+  public BaseResponse<Void> delete(@PathVariable Long id) {
     pointsConfigHandler.delete(id);
-    return "Points config deleted sucessfully";
+    return new BaseResponse<>(
+        ResultCode.SUCCESS.getCode(),
+        messageSource.getMessage(
+            "deleted.data.success", new Object[] {Constant.POINTS_CONFIG}, Locale.getDefault()));
   }
 }

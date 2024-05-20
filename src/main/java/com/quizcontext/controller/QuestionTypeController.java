@@ -1,12 +1,16 @@
 package com.quizcontext.controller;
 
+import com.quizcontext.constant.Constant;
+import com.quizcontext.dto.BaseResponse;
 import com.quizcontext.dto.request.QuestionTypeRequest;
 import com.quizcontext.dto.request.QuestionTypeUpdateRequest;
 import com.quizcontext.dto.response.QuestionTypeResponse;
+import com.quizcontext.enums.ResultCode;
 import com.quizcontext.handler.QuestionTypeHandler;
 import jakarta.validation.Valid;
 import java.util.List;
-
+import java.util.Locale;
+import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,40 +25,63 @@ import org.springframework.web.bind.annotation.RestController;
 public class QuestionTypeController {
 
   private final QuestionTypeHandler questionTypeHandler;
+  private final MessageSource messageSource;
 
-  public QuestionTypeController(QuestionTypeHandler questionTypeHandler) {
+  public QuestionTypeController(
+      QuestionTypeHandler questionTypeHandler, MessageSource messageSource) {
     this.questionTypeHandler = questionTypeHandler;
+    this.messageSource = messageSource;
   }
 
   @PostMapping
-  public QuestionTypeResponse create(@RequestBody @Valid QuestionTypeRequest questionTypeRequest) {
+  public BaseResponse<QuestionTypeResponse> create(
+      @RequestBody @Valid QuestionTypeRequest questionTypeRequest) {
     QuestionTypeResponse questionTypeResponse = questionTypeHandler.create(questionTypeRequest);
-    return questionTypeResponse;
+    return new BaseResponse<>(
+        ResultCode.SUCCESS.getCode(),
+        messageSource.getMessage(
+            "saved.data.success", new Object[] {Constant.QUESTION_TYPE}, Locale.getDefault()),
+        questionTypeResponse);
   }
 
   @GetMapping("/{id}")
-  public QuestionTypeResponse getById(@PathVariable Long id) {
+  public BaseResponse<QuestionTypeResponse> getById(@PathVariable Long id) {
     QuestionTypeResponse questionTypeResponse = questionTypeHandler.getById(id);
-    return questionTypeResponse;
+    return new BaseResponse<>(
+        ResultCode.SUCCESS.getCode(),
+        messageSource.getMessage(
+            "found.data.success", new Object[] {Constant.QUESTION_TYPE}, Locale.getDefault()),
+        questionTypeResponse);
   }
 
   @GetMapping
-  public List<QuestionTypeResponse> getAll() {
+  public BaseResponse<List<QuestionTypeResponse>> getAll() {
     List<QuestionTypeResponse> questionTypeResponses = questionTypeHandler.getAll();
-    return questionTypeResponses;
+    return new BaseResponse<>(
+        ResultCode.SUCCESS.getCode(),
+        messageSource.getMessage(
+            "found.data.success", new Object[] {Constant.QUESTION_TYPE}, Locale.getDefault()),
+        questionTypeResponses);
   }
 
   @PutMapping
-  public QuestionTypeResponse update(
+  public BaseResponse<QuestionTypeResponse> update(
       @RequestBody @Valid QuestionTypeUpdateRequest questionTypeUpdateRequest) {
     QuestionTypeResponse questionTypeResponse =
         questionTypeHandler.update(questionTypeUpdateRequest);
-    return questionTypeResponse;
+    return new BaseResponse<>(
+        ResultCode.SUCCESS.getCode(),
+        messageSource.getMessage(
+            "updated.data.success", new Object[] {Constant.QUESTION_TYPE}, Locale.getDefault()),
+        questionTypeResponse);
   }
 
   @DeleteMapping("/{id}")
-  public String delete(@PathVariable Long id){
+  public BaseResponse<Void> delete(@PathVariable Long id) {
     questionTypeHandler.delete(id);
-    return "Question type deleted successfully";
+    return new BaseResponse<>(
+        ResultCode.SUCCESS.getCode(),
+        messageSource.getMessage(
+            "deleted.data.success", new Object[] {Constant.QUESTION_TYPE}, Locale.getDefault()));
   }
 }

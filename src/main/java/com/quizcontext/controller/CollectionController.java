@@ -43,27 +43,42 @@ public class CollectionController {
   }
 
   @GetMapping("/{id}")
-  public CollectionResponse getById(@PathVariable Long id) {
+  public BaseResponse<CollectionResponse> getById(@PathVariable Long id) {
     CollectionResponse collectionResponse = collectionHandler.getById(id);
-    return collectionResponse;
+    return new BaseResponse<>(
+        ResultCode.SUCCESS.getCode(),
+        messageSource.getMessage(
+            "found.data.success", new Object[] {Constant.COLLECTION}, Locale.getDefault()),
+        collectionResponse);
   }
 
   @GetMapping
-  public List<CollectionResponse> getAll() {
-    List<CollectionResponse> collectionResponses = collectionHandler.getAll();
-    return collectionResponses;
+  public BaseResponse<List<CollectionResponse>> getAll() {
+    List<CollectionResponse> collectionResponse = collectionHandler.getAll();
+    return new BaseResponse<>(
+        ResultCode.SUCCESS.getCode(),
+        messageSource.getMessage(
+            "found.data.success", new Object[] {Constant.COLLECTION}, Locale.getDefault()),
+        collectionResponse);
   }
 
   @PutMapping
-  public CollectionResponse update(
+  public BaseResponse<CollectionResponse> update(
       @RequestBody @Valid CollectionUpdateRequest collectionUpdateRequest) {
     CollectionResponse collectionResponse = collectionHandler.update(collectionUpdateRequest);
-    return collectionResponse;
+    return new BaseResponse<>(
+        ResultCode.SUCCESS.getCode(),
+        messageSource.getMessage(
+            "updated.data.success", new Object[] {Constant.COLLECTION}, Locale.getDefault()),
+        collectionResponse);
   }
 
   @DeleteMapping("/{id}")
-  public String delete(@PathVariable Long id) {
+  public BaseResponse<String> delete(@PathVariable Long id) {
     collectionHandler.delete(id);
-    return "Data deleted succesfully";
+    return new BaseResponse<>(
+        ResultCode.SUCCESS.getCode(),
+        messageSource.getMessage(
+            "deleted.data.success", new Object[] {Constant.COLLECTION}, Locale.getDefault()));
   }
 }
