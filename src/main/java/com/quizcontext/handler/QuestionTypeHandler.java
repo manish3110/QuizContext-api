@@ -38,4 +38,8 @@ public class QuestionTypeHandler {
     QuestionType questionType = questionTypeMapper.toEntity(questionTypeUpdateRequest);
     return questionTypeMapper.toResponse(questionTypeService.update(questionType));
   }
+
+  public void delete(Long id) {
+    questionTypeService.delete(id);
+  }
 }

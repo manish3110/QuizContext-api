@@ -41,4 +41,9 @@ public class QuestionTypeImp implements QuestionTypeService {
         questionTypeMapper.toDbEntity(questionType, existQuestionType);
     return questionTypeRepository.save(updatedQuestionType);
   }
+
+  @Override
+  public void delete(Long id) {
+    questionTypeRepository.deleteById(id);
+  }
 }

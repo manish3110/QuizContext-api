@@ -11,4 +11,6 @@ public interface QuestionTypeService {
   QuestionType getById(Long id);
 
   QuestionType update(QuestionType questionType);
+
+  void delete(Long id);
 }
