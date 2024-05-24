@@ -4,7 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum ResultCode {
-  SUCCESS(1001);
+  SUCCESS(1001),
+  DATA_NOT_FOUND(1101, "Data Not found ");
 
   private final int code;
   private String message;
